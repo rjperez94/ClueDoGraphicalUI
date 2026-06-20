@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Java Application</title>
+	<link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg">
+    <!-- 1. Load the CheerpJ Runtime Library -->
+    <script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
+	<!-- Import the Zero-MD script to render markdown in your HTML -->
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
+</head>
+<body>
+
+<div id="java-container" style="width: 100vw; height: 100vh;"></div>
+
+<script>
+    async function loadJavaApp() {
+        // 2. Initialize the WebAssembly JVM environment - initialize in Java 17 mode
+        await cheerpjInit({ version: 17 });
+
+        // 3. Create a graphical window to contain Swing/AWT components
+        const container = document.getElementById("java-container");
+		cheerpjCreateDisplay(1920, 1080, container);
+
+        // 4. Run the application.
+        // Note: '/app/' is a virtual mount point that maps to the root directory of your website.
+        await cheerpjRunMain(
+            "ClueDoGraphicalUI",
+            "/app/ClueDoGraphicalUI/ClueDoGraphicalUI.jar"
+        );
+    }
+
+    // Start the application loading process
+    loadJavaApp();
+</script>
+
+<!-- Load .md file by pointing the "src" attribute to it -->
+<zero-md src="README.md"></zero-md>
+	
+</body>
+</html>
