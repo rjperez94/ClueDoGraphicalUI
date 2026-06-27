@@ -1,5 +1,3 @@
-package tests;
-
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -21,7 +19,8 @@ import model.Square;
  *
  */
 public class GameSetupTests {
-	@Test	public void validPlayareaNeigbour() {
+	@Test
+	public void validPlayareaNeigbour() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 0);
 		Square playarea = board.getSquare(4, 5);	//get square
 		assertTrue(playarea.hasNeigbour(3, 5));	//above
@@ -30,7 +29,8 @@ public class GameSetupTests {
 		assertTrue(playarea.hasNeigbour(4, 6));	//right
 	}
 	
-	@Test	public void validPlayareaNeigbour2() {
+	@Test
+	public void validPlayareaNeigbour2() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 0);
 		Square playarea = board.getSquare(0, 5);	//get square @ label "th"
 		/*
@@ -46,7 +46,8 @@ public class GameSetupTests {
 		assertFalse(playarea.hasNeigbour(1, 6));	//not south east diagonal  i.e. not a  doorway to BR
 	}
 	
-	@Test	public void invalidPlayareaNeigbour() {
+	@Test
+	public void invalidPlayareaNeigbour() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 0);
 		Square playarea = board.getSquare(12, 2);	//get square
 		assertFalse(playarea.hasNeigbour(11, 1));	//not itself
@@ -56,7 +57,8 @@ public class GameSetupTests {
 		assertFalse(playarea.hasNeigbour(13, 3));	//not south east diagonal
 	}
 	
-	@Test	public void invalidCentreRoomNeigbour() {
+	@Test
+	public void invalidCentreRoomNeigbour() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 0);
 		Square centre = board.getSquare(8, 9);	//get 'CR' square
 		//should have no neighbors
@@ -66,7 +68,8 @@ public class GameSetupTests {
 		assertFalse(centre.hasNeigbour(8, 10));	//not right
 	}
 	
-	@Test	public void validDoorwayNeigbour() {
+	@Test
+	public void validDoorwayNeigbour() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 0);
 		Square dw = board.getSquare(3, 3);	//get doorway 'dw' to Kitchen (KC)
 		/*
@@ -82,7 +85,8 @@ public class GameSetupTests {
 		assertTrue(dw.hasNeigbour(3, 4));	//right
 	}
 	
-	@Test	public void invalidDoorwayNeigbour() {
+	@Test
+	public void invalidDoorwayNeigbour() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 0);
 		Square dw = board.getSquare(3, 3);	//get doorway 'dw' to Kitchen (KC)
 		/*
@@ -96,7 +100,8 @@ public class GameSetupTests {
 		assertFalse(dw.hasNeigbour(4, 4));	//not south east diagonal
 	}
 	
-	@Test	public void validRoomNeigbour() {
+	@Test
+	public void validRoomNeigbour() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 0);
 		Square rm = board.getSquare(13, 7);	//get room Hall (HL)
 		/*
@@ -113,7 +118,8 @@ public class GameSetupTests {
 		assertTrue(rm.hasNeigbour(14, 12));	//right HL dw
 	}
 	
-	@Test	public void invalidRoomNeigbour() {
+	@Test
+	public void invalidRoomNeigbour() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 0);
 		Square rm = board.getSquare(13, 7);	//get room Hall (HL)
 		/*
@@ -132,67 +138,73 @@ public class GameSetupTests {
 		assertFalse(rm.hasNeigbour(12, 6));	//not north west diagonal
 	}
 	
-	@Test	public void validPlayerLoc() {
+	@Test
+	public void validPlayerLoc() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 6);		//6 players
 		//P1 and so on
-		assertTrue(board.getPlayer(1).getLocation().equals(board.getSquare(17, 5)) );
-		assertTrue(board.getPlayer(2).getLocation().equals(board.getSquare(12, 0)) );
-		assertTrue(board.getPlayer(3).getLocation().equals(board.getSquare(0, 6)) );
-		assertTrue(board.getPlayer(4).getLocation().equals(board.getSquare(9, 17)) );
-		assertTrue(board.getPlayer(5).getLocation().equals(board.getSquare(0, 11)) );
-		assertTrue(board.getPlayer(6).getLocation().equals(board.getSquare(13, 17)) );
+        assertEquals(board.getPlayer(1).getLocation(), board.getSquare(17, 5));
+		assertEquals(board.getPlayer(2).getLocation(), board.getSquare(12, 0));
+		assertEquals(board.getPlayer(3).getLocation(), board.getSquare(0, 6));
+		assertEquals(board.getPlayer(4).getLocation(), board.getSquare(9, 17));
+		assertEquals(board.getPlayer(5).getLocation(), board.getSquare(0, 11));
+		assertEquals(board.getPlayer(6).getLocation(), board.getSquare(13, 17));
 	}
 	
-	@Test	public void invalidPlayerLoc() {
+	@Test
+	public void invalidPlayerLoc() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 6);		//6 players
 		//P1 and so on
-		assertFalse(board.getPlayer(1).getLocation().equals(board.getSquare(11, 5)) );
-		assertFalse(board.getPlayer(2).getLocation().equals(board.getSquare(15, 14)) );
-		assertFalse(board.getPlayer(3).getLocation().equals(board.getSquare(5, 15)) );
-		assertFalse(board.getPlayer(4).getLocation().equals(board.getSquare(9, 12)) );
-		assertFalse(board.getPlayer(5).getLocation().equals(board.getSquare(10, 17)) );
-		assertFalse(board.getPlayer(6).getLocation().equals(board.getSquare(1, 17)) );
+        assertNotEquals(board.getPlayer(1).getLocation(), board.getSquare(11, 5));
+		assertNotEquals(board.getPlayer(2).getLocation(), board.getSquare(15, 14));
+		assertNotEquals(board.getPlayer(3).getLocation(), board.getSquare(5, 15));
+		assertNotEquals(board.getPlayer(4).getLocation(), board.getSquare(9, 12));
+		assertNotEquals(board.getPlayer(5).getLocation(), board.getSquare(10, 17));
+		assertNotEquals(board.getPlayer(6).getLocation(), board.getSquare(1, 17));
 	}
 	
-	@Test	public void invalidPlayerSpawn() {
+	@Test
+	public void invalidPlayerSpawn() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 4);		//4 players
 		//P5 and P6 should NOT have any mappings
-		assertEquals(board.getPlayer(5), null);
-		assertEquals(board.getPlayer(6), null);
+        assertNull(board.getPlayer(5));
+        assertNull(board.getPlayer(6));
 	}
 	
-	@Test	public void invalidPlayerSpawn2() {
+	@Test
+	public void invalidPlayerSpawn2() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 3);		//4 players
 		//P4 and P5 and P6 should NOT have any mappings
-		assertEquals(board.getPlayer(4), null);
-		assertEquals(board.getPlayer(5), null);
-		assertEquals(board.getPlayer(6), null);
+        assertNull(board.getPlayer(4));
+        assertNull(board.getPlayer(5));
+        assertNull(board.getPlayer(6));
 	}
 	
-	@Test	public void validSolution() {
+	@Test
+	public void validSolution() {
 		CentreRoom solution = new CentreRoom();
 		
 		Card c1 = new Card(Type.ROOM, "Lounge");
 		Card c2 = new Card(Type.CHARACTER, "Miss Scarrlet");
 		Card c3 = new Card(Type.WEAPON, "Dagger");
 		
-		ArrayList<Card>list = new ArrayList<Card>();
+		ArrayList<Card>list = new ArrayList<>();
 		list.add(c1);
 		list.add(c2);
 		list.add(c3);
 		solution.putInEnvelope(list);
 		
-		assertEquals(solution.getWeapon(), "Dagger");
-		assertEquals(solution.getPlace(), "Lounge");
-		assertEquals(solution.getSuspect(), "Miss Scarrlet");
+		assertEquals("Dagger", solution.getWeapon());
+		assertEquals("Lounge", solution.getPlace());
+		assertEquals("Miss Scarrlet", solution.getSuspect());
 	}
 	
 	//turn off / comment out delay in Player.hasCard(name) when testing this
-	@Test	public void validCards() {
+	@Test
+	public void validCards() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 1);	//1 player only
 		Player p = board.getPlayer(1);
 		List<Card> cards = new Loader(18, 18).populateCards();
-		List<String> p1Cards = new ArrayList<String>();
+		List<String> p1Cards = new ArrayList<>();
 		Collections.shuffle(cards);
 		
 		for (int i=0; i < cards.size(); i+=2) {
@@ -202,11 +214,12 @@ public class GameSetupTests {
 		}
 		
 		for (String name: p1Cards) {		//given the name, player should have card
-			assertNotEquals(p.hasCard(name, true), null);		//turn off / comment out delay in Player.hasCard(name) when testing this
+			assertNotEquals(null, p.hasCard(name, true));		//turn off / comment out delay in Player.hasCard(name) when testing this
 		}
 	}
 	
-	@Test	public void invalidCards() {
+	@Test
+	public void invalidCards() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 1);	//1 player only
 		Player p = board.getPlayer(1);
 		List<Card> cards = new Loader(18, 18).populateCards();
@@ -217,7 +230,7 @@ public class GameSetupTests {
 		}
 		//now all Cards in collection are the cards that are left
 		for (Card c: cards) {		//given the name, player should NOT have card
-			assertEquals(p.hasCard(c.name, true), null);
+            assertNull(p.hasCard(c.name, true));
 		}
 	}
 	

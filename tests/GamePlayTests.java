@@ -1,5 +1,3 @@
-package tests;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,24 +16,26 @@ import static org.junit.Assert.*;
  *
  */
 public class GamePlayTests {
-	@Test	public void gameStart() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	@Test
+	public void gameStart() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		Cluedo game = new Cluedo(3);	//3 players
 		Field f = null;
 		
 		f = Cluedo.class.getDeclaredField("isWon");		//not won
         f.setAccessible(true);
-        assertEquals(f.get(game).toString(), "false");
+        assertEquals("false", f.get(game).toString());
         
         f = Cluedo.class.getDeclaredField("players");		//only 3 players indeed
         f.setAccessible(true);
-        assertEquals(f.get(game).toString(), "3");
+        assertEquals("3", f.get(game).toString());
         
         f = Cluedo.class.getDeclaredField("current");		//P1 always starts
         f.setAccessible(true);
-        assertEquals(f.get(game).toString(), "1");
+        assertEquals("1", f.get(game).toString());
 	}
 	
-	@Test	public void diceRoll() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+	@Test
+	public void diceRoll() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		Cluedo game = new Cluedo(1);		//1 player
 		Method m = null;
 		for (int counter = 1; counter < 1000; counter++) {		//roll die 1000 times
@@ -47,7 +47,8 @@ public class GamePlayTests {
 		}
 	}
 	
-	@Test	public void nextTurn() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException, SecurityException {
+	@Test
+	public void nextTurn() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException, SecurityException {
 		Cluedo game = new Cluedo(4);		//4 players
 		Field f = null;
 		Method m = null;
@@ -59,20 +60,21 @@ public class GamePlayTests {
 		
 		//current starts with 1 as in P1
 		m.invoke(game, true);		//is testing, ..current should == 2
-		assertEquals(f.get(game).toString(), "2");
+		assertEquals("2", f.get(game).toString());
 		m.invoke(game, true);		//is testing, ..current should == 3
-		assertEquals(f.get(game).toString(), "3");
+		assertEquals("3", f.get(game).toString());
 		m.invoke(game, true);		//is testing, ..current should == 4
-		assertEquals(f.get(game).toString(), "4");
+		assertEquals("4", f.get(game).toString());
 		m.invoke(game, true);		//is testing, ..current should == 1
-		assertEquals(f.get(game).toString(), "1");
+		assertEquals("1", f.get(game).toString());
 		m.invoke(game, true);		//is testing, ..current should == 2
-		assertEquals(f.get(game).toString(), "2");
+		assertEquals("2", f.get(game).toString());
 		m.invoke(game, true);		//is testing, ..current should == 3
-		assertEquals(f.get(game).toString(), "3");
+		assertEquals("3", f.get(game).toString());
 	}
 	
-	@Test	public void gameOver() throws NoSuchFieldException, SecurityException, 
+	@Test
+	public void gameOver() throws NoSuchFieldException, SecurityException,
 			IllegalArgumentException, IllegalAccessException, 
 			NoSuchMethodException, InvocationTargetException {
 		Cluedo game = new Cluedo(5);		//5 players
@@ -87,10 +89,11 @@ public class GamePlayTests {
         }
         m=Cluedo.class.getDeclaredMethod("gameOver");
         m.setAccessible(true);
-        assertEquals(m.invoke(game).toString(), "true");		//gameOver() should be true
+        assertEquals("true", m.invoke(game).toString());		//gameOver() should be true
 	}
 	
-	@Test	public void validMoves() {
+	@Test
+	public void validMoves() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 3);
 		/* row, col
 		 * {17,5},		//starting positions for player 1
@@ -114,7 +117,8 @@ public class GamePlayTests {
 		assertTrue(board.movePiece(3, 2, 12));	//out to right BR doorway
 	}
 	
-	@Test	public void invalidMoves() {
+	@Test
+	public void invalidMoves() {
 		Board board = new Board(new Loader(18, 18).getCoords(), 1);
 		/* row, col
 		 * {17,5},		//starting position for player 1
