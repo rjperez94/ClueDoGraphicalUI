@@ -2,7 +2,7 @@
 
 Please <a href="https://github.com/rjperez94/ClueDoGraphicalUI/blob/master/Brief.pdf">click here</a> for more information about this project
 
-<img src="https://github.com/rjperez94/ClueDoGraphicalUI/blob/master/gui%20object%20diagram.png">
+<img src="https://raw.githubusercontent.com/rjperez94/ClueDoGraphicalUI/refs/heads/master/gui%20object%20diagram.png">
 
 <a href="https://github.com/rjperez94/ClueDoGraphicalUI/blob/master/Design%20Report.pdf">View</a> the design for the GUI
 
